@@ -10,10 +10,13 @@ for (head in colnames(tt)) {
   if(head != outcome.name) {
 
     counts <- table(tt[,outcome.name], tt[,head])
-    barplot(counts,xlab=head)
 
-    counts_prop = prop.table(counts, margin=2)
-    barplot(counts_prop)
+
+		qq <- ggplot(tt, aes(x = tt[,head])) + xlab(head) + geom_bar(aes(fill = factor(tt[,outcome.name])))
+		print(qq)
+
+		qq <- ggplot(tt, aes(x = tt[,head])) + xlab(head) + geom_bar(aes(fill = factor(tt[,outcome.name])), position = 'fill')
+		print(qq)
   }
 }
 
