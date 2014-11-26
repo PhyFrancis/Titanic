@@ -5,10 +5,10 @@ library(Amelia);
 
 outcome.name = "Survived"
 
-sink("result/summary.txt")
+sink("data/summary.txt")
 summary(df);
 
-pdf("result/Rplot.pdf")
+pdf("data/Rplot.pdf")
 missmap(df);
 for (head in colnames(df)) {
   if(head != outcome.name) {
