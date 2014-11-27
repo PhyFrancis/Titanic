@@ -5,7 +5,7 @@ library(caret);
 ## train the model
 modFit <- list();
 for(i in 1:length(folds)) {
-	modFit[[i]] <- train(Survived ~ Sex + Pclass + SibSp + Parch + Fare + Embarked, 
+	modFit[[i]] <- train(Survived ~ Name + Sex + Pclass + SibSp + Parch + Fare + Embarked, 
  									method="rpart",
 									data = training[folds[[i]],]);
 }
