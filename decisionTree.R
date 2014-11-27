@@ -20,14 +20,24 @@ for(i in 1:length(folds)) {
 }
 
 ## predict
-pred = 0;
-for(i in 1:length(folds)) {
-	pred <- pred + predict(modFit[[1]],newdata=testing);
+alg <- 1; # alg 1: use mean value
+          # alg 2: use majority vote
+pred <- 0;
+if(alg == 1) {
+	for(i in 1:length(folds)) {
+		pred <- pred + predict(modFit[[i]],newdata=testing);
+	}
+	pred <- as.integer(pred / length(folds) + 0.5)
+} else if(alg == 2) {
+	for(i in 1:length(folds)) {
+		pred0 <- predict(modFit[[i]],newdata=testing);
+		pred <- pred + as.integer(pred0 + 0.5);
+	}
+	pred <- as.integer(pred / length(folds) + 0.5)
+} else {
+	print("Algorithm not implemented");
 }
-pred <- as.integer(pred / length(folds) + 0.5);
+
+## show confusion matrix
 obs <- testing$Survived
 confusionMatrix(obs, pred)
-
-## pred <- as.integer(predict(modFit[[1]],newdata=testing) + 0.5)
-## obs <- testing$Survived
-## confusionMatrix(obs, pred)
