@@ -3,15 +3,13 @@ source("import.R")
 library(caret);
 
 ## train the model
-modFit <- train(Survived ~ Sex + Pclass + SibSp + Parch + Fare + Embarked, 
-                method="rpart",data=training);
+modFit <- train(Survived ~ Name + Sex + Pclass + SibSp + Parch + Fare + Embarked, 
+								data = training,
+                method = "rf",
+								prox = TRUE)
 
 ## print out model
-print(modFit$finalModel)
-pdf("data/tree.pdf")
-plot(modFit$finalModel, uniform = TRUE,
-     main = "Classification Tree")
-text(modFit$finalModel, use.n = TRUE, all = TRUE, cex = .8)
+print(modFit)
 
 ## predict
 pred <- as.integer(predict(modFit,newdata=testing) + 0.5)
