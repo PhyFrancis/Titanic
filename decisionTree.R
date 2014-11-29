@@ -5,8 +5,8 @@ library(caret);
 ## train the model
 modFit <- train(Survived ~ Name + Sex + Pclass + SibSp + Parch + Fare + Embarked, 
 								data = training,
-                method = "rf",
-								prox = TRUE)
+                method = "gbm",
+								verbose = FALSE)
 
 ## print out model
 print(modFit)
